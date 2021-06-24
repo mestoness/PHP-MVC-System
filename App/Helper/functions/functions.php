@@ -83,41 +83,7 @@ function gets($name)
     return false;
   }
 }
-function calcTimeSpan($time, $search = array(), $langFile = array())
-{
-  $varReturn = array();
-  $varSecondsAgo = (time() - $time);
-  if ($varSecondsAgo >= 31536000) {
-    $varReturn[] = intval($varSecondsAgo / 31536000) . " Year Ago";
-  } elseif ($varSecondsAgo >= 2419200) {
-    $varReturn[] = intval($varSecondsAgo / 2419200) . " Month Ago";
-  } elseif ($varSecondsAgo >= 86400) {
-    $varReturn[] = intval($varSecondsAgo / 86400) . " Day Ago";
-  } elseif ($varSecondsAgo >= 3600) {
-    $varReturn[] = intval($varSecondsAgo / 3600) . " Hour Ago";
-  } elseif ($varSecondsAgo >= 60) {
-    $varReturn[] = intval($varSecondsAgo / 60) . " Minute Ago";
-  } else {
-    $varReturn[] = "Just Now";
-  }
-  return str_replace($search, $langFile, $varReturn)[0];
-}
-function dateToAgo($time)
-{
 
-  $xxx = explode("|", $time);
-  $saat = explode(":", $xxx[0]);
-  $ayYıl = array_map(function ($item) {
-    return replaceSpace($item);
-  }, explode(".", $xxx[1]));
-
-
-  $dataaa = DateTime::createFromFormat(
-    'H:i d.m.Y',
-    "$saat[0]:$saat[1] $ayYıl[0].$ayYıl[1].$ayYıl[2]"
-  )->getTimestamp();
-  return $dataaa;
-}
 function post($name)
 {
   if (isset($_POST[$name])) {
